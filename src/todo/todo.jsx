@@ -23,7 +23,7 @@ export default class Todo extends Component {
   }
 
   refresh(description='') {
-    const search = description ? `&descrition__regex=/${description}/` : ''
+    const search = description ? `&description__regex=/${description}/` : ''
     axios.get(`${URL}?sort=-createdAt${search}`)
       .then(response => this.setState({...this.state, description: '', list: response.data}))
   }
@@ -38,7 +38,7 @@ export default class Todo extends Component {
       .then(response => this.refresh())
   }
 
-  handleRemove() {
+  handleRemove(todo) {
     axios.delete(`${URL}/${todo._id}`)
       .then(response => this.refresh(this.state.description))
   }
